@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "qurlenv\\Scripts\\python.exe",
+    "python.formatting.provider": "black"
+}
