@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "qurlenv\\Scripts\\python.exe",
+    "python.pythonPath": "D:\\Code\\Git stuff\\QURL\\qurlenv\\Scripts\\python.exe",
     "python.formatting.provider": "black"
 }
