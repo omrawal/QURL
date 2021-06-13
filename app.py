@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import redirect
 import string, random
 import os
-from .qrCode import detectFromImage, validateURL, detectLiveFeed, createQRcode
+from qrCode import detectFromImage, validateURL, detectLiveFeed, createQRcode
 
 
 app = Flask(__name__)
