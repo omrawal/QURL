@@ -5,13 +5,20 @@ import numpy as np
 from pyzbar.pyzbar import decode
 
 
+def validateURL(entry):
+    if not validators.url(entry):
+        return False
+    else:
+        return True
+
+
 def createQRcode(value):
     img = qrcode.make(value)
     # if not validators.url(value):
     #     filename = value + ".jpg"
     # else:
     #     filename = "link.jpg"
-    filename = "qr.jpg"
+    filename = "static/qr.jpg"
     img.save(filename)
 
 
@@ -66,5 +73,5 @@ def detectFromImage(path):
 
 
 img_path = "Hello.jpg"
-print(detectFromImage(img_path))
+# print(detectFromImage(img_path))
 # print(detectLiveFeed())

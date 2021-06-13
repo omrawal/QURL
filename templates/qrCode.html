@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %} QR-Code {% endblock %}
+
+{% block content %}
+
+<!-- <h1>https://qurl-omrawal.herokuapp.com//{{short_url_display}}</h1>
+<a href="https://qurl-omrawal.herokuapp.com/">Back To Home</a> -->
+<div class="card">
+    <div class="card-body">
+        <h2>Create a new QR Code</h2>
+        <form method="post">
+            <div class="form-row align-items-center">
+                <div class="col-sm-3 my-1">
+                    <label class="sr-only" for="inlineFormInputName">Info</label>
+                    <input id="cam" type="hidden" name="cam" value="none">
+                    <input type="text" name=data class="form-control" id="inlineFormInputName"
+                        placeholder="Info to convert to QR-Code">
+                </div>
+                <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+        {% if context['create'] is sameas true %}
+        <img src="/static/qr.jpg" alt="QRCode" style="width:100px;height:100px;">
+        <a href="/static/qr.jpg" download="qr.jpg"><button type="button" class="btn btn-success">Download</button></a>
+        {% endif %}
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h2>Read QRCode from Image File</h2>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="exampleFormControlFile1">QRCode Image File</label>
+                <input id="cam" type="hidden" name="cam" value="none">
+                <input id="data" type="hidden" name="data" value="none">
+                <input type="file" name='file' class="form-control-file" id="exampleFormControlFile1">
+                <br><br>
+                <input type="submit" class="btn btn-primary" value="Upload">
+            </div>
+        </form>
+        {% if context['file'] is sameas true %}
+        <br>
+        <h5>Results of Scan:</h5>
+        <div class="p-3 mb-2 bg-dark text-white">
+            {% if context['url'] %}
+            <a href="{{context['url']}}" target="_blank">{{context['url']}}</a>
+
+            {% elif context['data'] %}
+            <h5>{{context['data']}}</h5>
+            {% elif context is none%}
+            {{context}}
+            <h5>No QR Code Detected!!!</h5>
+            {% endif %}
+        </div>
+
+
+        {% endif %}
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h2>Read QRCode From Live Feed</h2>
+        <form method="post">
+            <div class="form-row align-items-center">
+                <div class="col-sm-3 my-1">
+                    <input id="cam" type="hidden" name="cam" value="cam">
+                    <input id="data" type="hidden" name="data" value="none">
+                </div>
+                <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary">Capture</button>
+                </div>
+            </div>
+        </form>
+        {% if context['cam'] is sameas true %}
+        <br>
+        <h5>Results of Cam Capture:</h5>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Links</th>
+                    <!-- <th scope="col">Data</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for key in (context['url']) %}
+                <tr>
+                    <td>{{key}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key in (context['data']) %}
+                <tr>
+                    <td>{{key}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- {% if context['url'] %} -->
+        <!-- <a href="{{context['url']}}" target="_blank">{{context['url']}}</a> -->
+        <!-- {{context['url']}} -->
+        <!-- {% endif %} -->
+        <!-- {% if context['data'] %} -->
+        <!-- <h5>{{context['data']}}</h5> -->
+        <!-- {{context['data']}} -->
+        <!-- {% endif %} -->
+        {% if context is none%}
+        {{context}}
+        <h5>No QR Code Detected!!!</h5>
+        {% endif %}
+
+        {% endif %}
+    </div>
+
+
+
+
+</div>
+
+
+{% endblock %}
